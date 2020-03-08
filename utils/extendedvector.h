@@ -9,6 +9,7 @@
 
 #include "../sort/insertionsort.h"
 #include "../sort/shellsort.h"
+#include "../sort/selectionsort.h"
 
 using std::vector;
 using std::ostream;
@@ -32,6 +33,7 @@ class ExtendedVector : public vector<T> {
 
         void insertion_sort();
         void shell_sort();
+        void selection_sort();
 
         bool is_sorted() const;
         bool is_range() const;
@@ -104,6 +106,12 @@ void ExtendedVector<T>::insertion_sort() {
 template <class T>
 void ExtendedVector<T>::shell_sort() {
     ShellSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::selection_sort() {
+    SelectionSort<T> s;
     s(*this);
 }
 

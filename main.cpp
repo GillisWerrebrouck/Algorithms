@@ -5,9 +5,9 @@
 using std::cout;
 
 int main() {
-    ExtendedVector<int> data(10000);
+    ExtendedVector<int> data(100);
     cout << data;
-    data.shell_sort();
+    data.selection_sort();
     cout << data;
 
     return 0;
