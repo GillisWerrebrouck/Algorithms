@@ -6,9 +6,7 @@
 using std::cout;
 
 int main() {
-    HeapVector<int> data(100);
-    data.fill_range();
-    cout << data;
+    HeapVector<int> data(10);
     data.bottom_up_heapify();
     cout << data;
 

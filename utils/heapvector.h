@@ -25,10 +25,11 @@ class HeapVector : public ExtendedVector<T> {
 
         void top_down_heapify();
         void bottom_up_heapify();
-        void insert(int);
+        void insert(T);
         int extract(int);
         int extract_root();
-        void replace_root(int);
+        void replace(int, T);
+        void replace_root(T);
 
     private:
         void top_down_heapify(vector<T> &, int, int);
@@ -105,50 +106,28 @@ void HeapVector<T>::bottom_up_heapify() {
 
 // O(lg(N))
 template <class T>
-void HeapVector<T>::insert(int value) {
+void HeapVector<T>::insert(T value) {
     (*this).push_back(value);
     int i = this->size()-1;
-    int parent = (i-1)/2;
 
     // trickle-up the new value
-    while(0 <= parent && (*this)[parent] < (*this)[i]) {
-        swap((*this)[parent], (*this)[i]);
-
-        i = parent;
-        parent = (parent-1)/2;
-    }
+    trickle_up(*this, i);
 }
 
 // O(lg(N))
 template <class T>
 int HeapVector<T>::extract(int index) {
-    // replace the ndoe to extract with the last node
+    // replace the node to extract with the last node
     int extracted = (*this)[index];
     int n = this->size();
+
+    if(index >= n) throw std::out_of_range ("index out of range for heap");
+
     (*this)[index] = (*this)[n-1];
     (*this).pop_back();
 
-    int i = index;
-    int left_child = 2*i+1;
-    int right_child = 2*i+2;
-
     // trickle-down the new value
-    while(left_child < n && (*this)[left_child] > (*this)[i] || 
-            right_child < n && (*this)[right_child] > (*this)[i]) {
-        if((*this)[left_child] > (*this)[right_child]) {
-            swap((*this)[left_child], (*this)[i]);
-
-            i = left_child;
-            left_child = 2*i+1;
-            right_child = 2*i+2;
-        } else {
-            swap((*this)[right_child], (*this)[i]);
-
-            i = right_child;
-            left_child = 2*i+1;
-            right_child = 2*i+2;
-        }
-    }
+    trickle_down(*this, index);
 
     return extracted;
 }
@@ -157,6 +136,71 @@ int HeapVector<T>::extract(int index) {
 template <class T>
 int HeapVector<T>::extract_root() {
     return extract(0);
+}
+
+// O(lg(N))
+template <class T>
+void HeapVector<T>::replace(int index, T value) {
+    int n = this->size();
+    int i = index;
+
+    if(i >= n) throw std::out_of_range ("index out of range for heap");
+
+    int oldValue = (*this)[i];
+    (*this)[i] = value;
+
+    if(oldValue > value) {
+        // trickle-down the new value
+        trickle_down(*this, i);
+    } else if(oldValue < value) {
+        // trickle-up the new value
+        trickle_up(*this, i);
+    }
+}
+
+// O(lg(N))
+template <class T>
+void HeapVector<T>::replace_root(T value) {
+    int n = this->size();
+    (*this)[0] = value;
+
+    trickle_down(*this, 0);
+}
+
+template <class T>
+void trickle_up(vector<T> & v, int i) {
+    int parent = (i-1)/2;
+
+    while(0 <= parent && v[parent] < v[i]) {
+        swap(v[parent], v[i]);
+
+        i = parent;
+        parent = (parent-1)/2;
+    }
+}
+
+template <class T>
+void trickle_down(vector<T> & v, int i) {
+    int n = v.size();
+    int left_child = 2*i+1;
+    int right_child = 2*i+2;
+
+    while(left_child < n && v[left_child] > v[i] || 
+            right_child < n && v[right_child] > v[i]) {
+        if(v[left_child] > v[right_child]) {
+            swap(v[left_child], v[i]);
+
+            i = left_child;
+            left_child = 2*i+1;
+            right_child = 2*i+2;
+        } else {
+            swap(v[right_child], v[i]);
+
+            i = right_child;
+            left_child = 2*i+1;
+            right_child = 2*i+2;
+        }
+    }
 }
 
 #endif
