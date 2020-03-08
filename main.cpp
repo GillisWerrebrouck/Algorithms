@@ -1,13 +1,15 @@
 #include <iostream>
 
 #include "utils/extendedvector.h"
+#include "utils/heapvector.h"
 
 using std::cout;
 
 int main() {
-    ExtendedVector<int> data(100);
+    HeapVector<int> data(100);
+    data.fill_range();
     cout << data;
-    data.selection_sort();
+    data.bottom_up_heapify();
     cout << data;
 
     return 0;
