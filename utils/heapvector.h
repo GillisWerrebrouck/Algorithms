@@ -30,13 +30,16 @@ class HeapVector : public ExtendedVector<T> {
         int extract_root();
         void replace(int, T);
         void replace_root(T);
+        void heap_sort();
 
     private:
-        void top_down_heapify(vector<T> &, int, int);
+        void top_down_heapify(int, int);
 };
 
 template <class T>
-HeapVector<T>::HeapVector(int size) : ExtendedVector<T>(size) {}
+HeapVector<T>::HeapVector(int size) : ExtendedVector<T>(size) {
+    bottom_up_heapify();
+}
 
 // O(N*lg(N))
 template <class T>
@@ -44,28 +47,28 @@ void HeapVector<T>::top_down_heapify() {
     int n = this->size();
     // iterate over all parent nodes
     for (int i = n/2-1; i >= 0; i--) {
-        top_down_heapify(*this, n, i);
+        top_down_heapify(n, i);
     }
 }
 
 template <class T>
-void HeapVector<T>::top_down_heapify(vector<T> & v, int n, int i) {
+void HeapVector<T>::top_down_heapify(int n, int i) {
     int max = i;
     int left_child = 2*i+1;
     int right_child = 2*i+2;
 
     // check heap condition on possible child nodes
-    if(left_child < n && v[left_child] > v[max]) {
+    if(left_child < n && (*this)[left_child] > (*this)[max]) {
         max = left_child;
     }
-    if(right_child < n && v[right_child] > v[max]) {
+    if(right_child < n && (*this)[right_child] > (*this)[max]) {
         max = right_child;
     }
 
     // check if the root changed
     if(max != i) {
-        swap(v[max], v[i]);
-        top_down_heapify(v, n, max);
+        swap((*this)[max], (*this)[i]);
+        top_down_heapify(n, max);
     }
 }
 
@@ -200,6 +203,16 @@ void trickle_down(vector<T> & v, int i) {
             left_child = 2*i+1;
             right_child = 2*i+2;
         }
+    }
+}
+
+template <class T>
+void HeapVector<T>::heap_sort() {
+    bottom_up_heapify();
+
+    for (int i = this->size() - 1; i >= 0; i--) {
+        swap((*this)[0], (*this)[i]);
+        top_down_heapify(i, 0);
     }
 }
 
