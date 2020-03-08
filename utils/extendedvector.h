@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include "../sort/insertionsort.h"
+
 using std::vector;
 using std::ostream;
 
@@ -26,6 +28,8 @@ class ExtendedVector : public vector<T> {
         void shuffle();
         void fill_random_without_doubles();
         void fill_random();
+
+        void insertion_sort();
 
         bool is_sorted() const;
         bool is_range() const;
@@ -87,6 +91,12 @@ void ExtendedVector<T>::fill_random() {
     std::uniform_int_distribution<int> dist{0, static_cast<int>(max_value)};
 
     std::generate(this->begin(), this->end(), [&dist, &rd]() { return dist(rd); });
+}
+
+template <class T>
+void ExtendedVector<T>::insertion_sort() {
+    InsertionSort<T> s;
+    s(*this);
 }
 
 template <class T>
