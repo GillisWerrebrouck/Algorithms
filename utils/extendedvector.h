@@ -8,6 +8,7 @@
 #include <cassert>
 
 #include "../sort/insertionsort.h"
+#include "../sort/shellsort.h"
 
 using std::vector;
 using std::ostream;
@@ -30,6 +31,7 @@ class ExtendedVector : public vector<T> {
         void fill_random();
 
         void insertion_sort();
+        void shell_sort();
 
         bool is_sorted() const;
         bool is_range() const;
@@ -96,6 +98,12 @@ void ExtendedVector<T>::fill_random() {
 template <class T>
 void ExtendedVector<T>::insertion_sort() {
     InsertionSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::shell_sort() {
+    ShellSort<T> s;
     s(*this);
 }
 
