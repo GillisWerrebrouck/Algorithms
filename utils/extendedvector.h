@@ -11,6 +11,7 @@
 #include "../sort/shellsort.h"
 #include "../sort/selectionsort.h"
 #include "../sort/topdownmergesort.h"
+#include "../sort/bottomupmergesort.h"
 
 using std::vector;
 using std::ostream;
@@ -36,6 +37,7 @@ class ExtendedVector : public vector<T> {
         void shell_sort();
         void selection_sort();
         void top_down_merge_sort();
+        void botom_up_merge_sort();
 
         bool is_sorted() const;
         bool is_range() const;
@@ -120,6 +122,12 @@ void ExtendedVector<T>::selection_sort() {
 template <class T>
 void ExtendedVector<T>::top_down_merge_sort() {
     TopDownMergeSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::botom_up_merge_sort() {
+    BottomUpMergeSort<T> s;
     s(*this);
 }
 
