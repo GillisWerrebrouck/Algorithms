@@ -9,11 +9,11 @@ using std::swap;
 template <typename T>
 class SelectionSort {
     public:
-        void operator()(vector<T> & v) const;
+        void operator()(vector<T> & v);
 };
 
 template <typename T>
-void SelectionSort<T>::operator()(vector<T> & v) const{
+void SelectionSort<T>::operator()(vector<T> & v) {
     for(int i = v.size(); i>0; i--) {
         int maxIndex = i;
         for(int j = 0; j<i; j++) {

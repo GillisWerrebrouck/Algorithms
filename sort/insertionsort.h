@@ -9,11 +9,11 @@ using std::swap;
 template <typename T>
 class InsertionSort {
     public:
-        void operator()(vector<T> & v) const;
+        void operator()(vector<T> & v);
 };
 
 template <typename T>
-void InsertionSort<T>::operator()(vector<T> & v) const{
+void InsertionSort<T>::operator()(vector<T> & v) {
 	for(int i = 1; i<v.size(); i++) {
 		int j = i-1;
 		while(j>-1 && v[j]>v[j+1]) {
