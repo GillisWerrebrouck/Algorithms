@@ -9,11 +9,11 @@ using std::swap;
 template <typename T>
 class ShellSort {
     public:
-        void operator()(vector<T> & v) const;
+        void operator()(vector<T> & v);
 };
 
 template <typename T>
-void ShellSort<T>::operator()(vector<T> & v) const{
+void ShellSort<T>::operator()(vector<T> & v) {
     // The Sedgewick's sequence (O(N^4/3) in case of big N)
     int gaps[] = { 929, 505, 209, 109, 41, 19, 5, 1 };
 
