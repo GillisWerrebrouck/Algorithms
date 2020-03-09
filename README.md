@@ -13,6 +13,7 @@
 - [x] top-down heap construction
 - [x] bottom-up heap construction
 - [x] heap manipulation (insert, extract, replace, etc.)
+- [x] heap sort
 
 ### Divide-and-conquer methods
 
