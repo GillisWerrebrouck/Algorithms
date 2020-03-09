@@ -6,9 +6,9 @@
 using std::cout;
 
 int main() {
-    HeapVector<int> data(10);
+    ExtendedVector<int> data(10);
     cout << data;
-    data.heap_sort();
+    data.top_down_merge_sort();
     cout << data;
 
     return 0;
