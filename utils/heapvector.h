@@ -190,7 +190,7 @@ void HeapVector<T>::heap_sort() {
     bottom_up_heapify();
     int n = this->size();
 
-    // O(N*lg(N))
+    // O((N-1)*lg(N)) = O(N*lg(N))
     for (int i = n-1; i > 0; i--) {
         swap((*this)[0], (*this)[i]);
         // O(lg(N))
