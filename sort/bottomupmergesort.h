@@ -12,67 +12,70 @@ class BottomUpMergeSort {
         void operator()(vector<T> & v);
 
     private:
-        void merge_sort(vector<T> &, int, int, vector<T> &);
-        void merge(vector<T> &, int, int, int, vector<T> &);
+        void merge_sort(vector<T> &, int, int);
+        void merge(vector<T> &, int, int, int);
 };
 
 int min(int x, int y) { return (x < y) ? x : y; }
 
 template <typename T>
 void BottomUpMergeSort<T>::operator()(vector<T> & v) {
-    vector<T> temp(v.size()/2);
-    merge_sort(v, 0, v.size(), temp);
+    merge_sort(v, 0, v.size());
 }
 
-// O(N*lg(N)) time complexity and O(N/2) = O(N) space complexity
+// O(N*lg(N)) time complexity and O(N) space complexity
 template <typename T>
-void BottomUpMergeSort<T>::merge_sort(vector<T> & v, int l, int r, vector<T> & temp) {
+void BottomUpMergeSort<T>::merge_sort(vector<T> & v, int l, int r) {
     // loop over all subparts starting at size 1
     for (int curr_size = 1; curr_size <= v.size()-1; curr_size *= 2) {
         // loop over all left part start positions
         for (int l = 0; l < v.size()-1; l += 2*curr_size) {
             // find middle of left subpart
-            int m = l + curr_size;
-            int r = min(l + 2*curr_size, v.size());
+            int m = min(l + curr_size -1, v.size()-1);
+            int r = min(l + 2*curr_size-1, v.size()-1);
 
             // merge left and right subpart
-            merge(v, l, m, r, temp);
+            merge(v, l, m, r);
         }
     }
 }
 
 template <typename T>
-void BottomUpMergeSort<T>::merge(vector<T> & v, int l, int m, int r, vector<T> & temp) {
-    int i = l;
-    int j = m;
-    int p = l;
+void BottomUpMergeSort<T>::merge(vector<T> & v, int l, int m, int r) {
+    int i, j, k;
+    int n1 = m-l+1;
+    int n2 = r-m;
+    vector<T> L(n1), R(n2);
 
-    // copy first part to temp vector
-    for(int k = 0; k < (m-l); k++) {
-        swap(v[k+l], temp[k]);
+    // copy both parts to a temp vector
+    for (i = 0; i < n1; i++) {
+        L[i] = v[l + i];
+    }
+    for (j = 0; j < n2; j++) {
+        R[j] = v[m + 1 + j];
     }
 
-    while(p < r) {
-        // as long as both parts have elements to merge
-        if(i < m && j < r) {
-            // swap the smallest value into the vector
-            if(temp[i-l] <= v[j]) {
-                swap(v[p], temp[i-l]);
-                i++;
-            } else {
-                swap(v[p], v[j]);
-                j++;
-            }
-        // if the first part still has elements, swap them into the vector
-        } else if (i < m) {
-            swap(v[p], temp[i-l]);
-            i++;
-        // if the second part still has elements, swap them into the vector
-        } else if (j < r) {
-            swap(v[p], v[j]);
-            j++;
+    // merge both temp vectors in the initial vector
+    i = 0;
+    j = 0;
+    k = l;
+    while(i < n1 && j < n2) {
+        if(L[i] <= R[j]) {
+            swap(v[k], L[i++]);
+        } else {
+            swap(v[k], R[j++]);
         }
-        p++;
+        k++;
+    } 
+  
+    // swap the remaining elements of the left subpart
+    while (i < n1) {
+        swap(v[k++], L[i++]);
+    }
+
+    // swap the remaining elements of the right subpart
+    while (j < n2) {
+        swap(v[k++], R[j++]);
     }
 }
 

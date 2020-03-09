@@ -14,7 +14,7 @@ class SelectionSort {
 
 template <typename T>
 void SelectionSort<T>::operator()(vector<T> & v) {
-    for(int i = v.size(); i>0; i--) {
+    for(int i = v.size()-1; i>0; i--) {
         int maxIndex = i;
         for(int j = 0; j<i; j++) {
             if(v[maxIndex]<v[j]) {
