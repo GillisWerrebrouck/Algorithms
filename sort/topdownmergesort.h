@@ -22,6 +22,7 @@ void TopDownMergeSort<T>::operator()(vector<T> & v) {
     merge_sort(v, 0, v.size(), temp);
 }
 
+// O(N*lg(N)) time complexity and O(N/2) = O(N) space complexity
 template <typename T>
 void TopDownMergeSort<T>::merge_sort(vector<T> & v, int l, int r, vector<T> & temp) {
     if(l < r-1) {
