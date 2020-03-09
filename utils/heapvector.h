@@ -30,6 +30,8 @@ class HeapVector : public ExtendedVector<T> {
         int extract_root();
         void replace(int, T);
         void replace_root(T);
+        void trickle_up(int);
+        void trickle_down(int, int);
         void heap_sort();
 
     private:
@@ -51,6 +53,7 @@ void HeapVector<T>::top_down_heapify() {
     }
 }
 
+// O(lg(N))
 template <class T>
 void HeapVector<T>::top_down_heapify(int n, int i) {
     int max = i;
@@ -114,7 +117,7 @@ void HeapVector<T>::insert(T value) {
     int i = this->size()-1;
 
     // trickle-up the new value
-    trickle_up(*this, i);
+    trickle_up(i);
 }
 
 // O(lg(N))
@@ -130,7 +133,7 @@ int HeapVector<T>::extract(int index) {
     (*this).pop_back();
 
     // trickle-down the new value
-    trickle_down(*this, index);
+    trickle_down(n, index);
 
     return extracted;
 }
@@ -154,10 +157,10 @@ void HeapVector<T>::replace(int index, T value) {
 
     if(oldValue > value) {
         // trickle-down the new value
-        trickle_down(*this, i);
+        trickle_down(n, i);
     } else if(oldValue < value) {
         // trickle-up the new value
-        trickle_up(*this, i);
+        trickle_up(i);
     }
 }
 
@@ -167,52 +170,40 @@ void HeapVector<T>::replace_root(T value) {
     int n = this->size();
     (*this)[0] = value;
 
-    trickle_down(*this, 0);
+    trickle_down(n, 0);
 }
 
+// O(lg(N))
 template <class T>
-void trickle_up(vector<T> & v, int i) {
+void HeapVector<T>::trickle_up(int i) {
     int parent = (i-1)/2;
 
-    while(0 <= parent && v[parent] < v[i]) {
-        swap(v[parent], v[i]);
+    while(0 <= parent && (*this)[parent] < (*this)[i]) {
+        swap((*this)[parent], (*this)[i]);
 
         i = parent;
         parent = (parent-1)/2;
     }
 }
 
+// O(lg(N))
 template <class T>
-void trickle_down(vector<T> & v, int i) {
-    int n = v.size();
-    int left_child = 2*i+1;
-    int right_child = 2*i+2;
-
-    while(left_child < n && v[left_child] > v[i] || 
-            right_child < n && v[right_child] > v[i]) {
-        if(v[left_child] > v[right_child]) {
-            swap(v[left_child], v[i]);
-
-            i = left_child;
-            left_child = 2*i+1;
-            right_child = 2*i+2;
-        } else {
-            swap(v[right_child], v[i]);
-
-            i = right_child;
-            left_child = 2*i+1;
-            right_child = 2*i+2;
-        }
-    }
+void HeapVector<T>::trickle_down(int n, int i) {
+    top_down_heapify(n, i);
 }
 
+// O(N + N*lg(N)) = O(N*lg(N))
 template <class T>
 void HeapVector<T>::heap_sort() {
+    // O(N)
     bottom_up_heapify();
+    int n = this->size();
 
-    for (int i = this->size() - 1; i >= 0; i--) {
+    // O(N*lg(N))
+    for (int i = n-1; i > 0; i--) {
         swap((*this)[0], (*this)[i]);
-        top_down_heapify(i, 0);
+        // O(lg(N))
+        trickle_down(i, 0);
     }
 }
 
