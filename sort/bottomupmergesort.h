@@ -12,20 +12,16 @@ class BottomUpMergeSort {
         void operator()(vector<T> & v);
 
     private:
-        void merge_sort(vector<T> &, int, int);
-        void merge(vector<T> &, int, int, int);
+        void merge(vector<T> &, vector<T> &, int, int, int);
 };
 
 int min(int x, int y) { return (x < y) ? x : y; }
 
-template <typename T>
-void BottomUpMergeSort<T>::operator()(vector<T> & v) {
-    merge_sort(v, 0, v.size());
-}
-
 // O(N*lg(N)) time complexity and O(N) space complexity
 template <typename T>
-void BottomUpMergeSort<T>::merge_sort(vector<T> & v, int l, int r) {
+void BottomUpMergeSort<T>::operator()(vector<T> & v) {
+    vector<T> temp(v.size()/2+1);
+
     // loop over all subparts starting at size 1
     for (int curr_size = 1; curr_size <= v.size()-1; curr_size *= 2) {
         // loop over all left part start positions
@@ -33,49 +29,43 @@ void BottomUpMergeSort<T>::merge_sort(vector<T> & v, int l, int r) {
             // find middle of left subpart
             int m = min(l + curr_size -1, v.size()-1);
             int r = min(l + 2*curr_size-1, v.size()-1);
-
+            
             // merge left and right subpart
-            merge(v, l, m, r);
+            merge(v, temp, l, m, r);
         }
     }
 }
 
 template <typename T>
-void BottomUpMergeSort<T>::merge(vector<T> & v, int l, int m, int r) {
-    int i, j, k;
-    int n1 = m-l+1;
-    int n2 = r-m;
-    vector<T> L(n1), R(n2);
-
-    // copy both parts to a temp vector
-    for (i = 0; i < n1; i++) {
-        L[i] = v[l + i];
-    }
-    for (j = 0; j < n2; j++) {
-        R[j] = v[m + 1 + j];
+void BottomUpMergeSort<T>::merge(vector<T> & v, vector<T> & temp, int l, int m, int r) {
+    // copy the first part to a temp vector
+    int p = l;
+	while(p <= m) {
+        swap(temp[p-l], v[p]);
+        p++;
     }
 
-    // merge both temp vectors in the initial vector
-    i = 0;
-    j = 0;
-    k = l;
-    while(i < n1 && j < n2) {
-        if(L[i] <= R[j]) {
-            swap(v[k], L[i++]);
+    p = 0;
+    int q = m+1;
+    int k = l;
+
+    // merge both parts in the initial vector
+    while(p <= m-l && q <= r) {
+        if(temp[p] <= v[q]) {
+            swap(temp[p++], v[k++]);
         } else {
-            swap(v[k], R[j++]);
+            swap(v[q++], v[k++]);
         }
-        k++;
-    } 
-  
+    }
+
     // swap the remaining elements of the left subpart
-    while (i < n1) {
-        swap(v[k++], L[i++]);
+    while(p <= m-l) {
+        swap(temp[p++], v[k++]);
     }
 
     // swap the remaining elements of the right subpart
-    while (j < n2) {
-        swap(v[k++], R[j++]);
+    while(q <= r) {
+        swap(v[q++], v[k++]);
     }
 }
 

@@ -18,7 +18,7 @@ class TopDownMergeSort {
 
 template <typename T>
 void TopDownMergeSort<T>::operator()(vector<T> & v) {
-    vector<T> temp(v.size()/2);
+    vector<T> temp(v.size()/2+1);
     merge_sort(v, 0, v.size(), temp);
 }
 
