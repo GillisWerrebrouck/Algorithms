@@ -25,7 +25,6 @@ void ShellSort<T>::operator()(vector<T> & v) {
                 j-=k;
             }
         }
-        k--;
     }
 }
 
