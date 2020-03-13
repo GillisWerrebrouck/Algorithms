@@ -37,6 +37,10 @@ void test_sort_methods(int size) {
 
     data.botom_up_merge_sort();
     print_sorted("bottom-up merge sort", data);
+    data.fill_random();
+
+    data.quicksort();
+    print_sorted("quicksort", data);
 
 
     HeapVector<int> heap(size);
