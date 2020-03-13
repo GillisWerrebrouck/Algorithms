@@ -20,8 +20,8 @@ void ShellSort<T>::operator()(vector<T> & v) {
     for(int k : gaps) {
         for(int i = k; i<v.size(); i+=k) {
             int j = i-k;
-            while(j>-1 && v[j]>v[j+1]) {
-                swap(v[j], v[j+1]);
+            while(j>-1 && v[j]>v[j+k]) {
+                swap(v[j], v[j+k]);
                 j-=k;
             }
         }
