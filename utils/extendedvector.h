@@ -14,6 +14,7 @@
 #include "../sort/bottomupmergesort.h"
 #include "../sort/quicksort.h"
 #include "../sort/dualpivotquicksort.h"
+#include "../search/binarysearch.h"
 
 using std::vector;
 using std::ostream;
@@ -44,6 +45,7 @@ class ExtendedVector : public vector<T> {
         void dual_pivot_quicksort();
 
         int sequential_search(int);
+        int binary_search(int);
 
         bool is_sorted() const;
         bool is_range() const;
@@ -157,6 +159,16 @@ int ExtendedVector<T>::sequential_search(int value) {
         }
     }
     return -1;
+}
+
+template <class T>
+int ExtendedVector<T>::binary_search(int value) {
+    BinarySearch<T> s;
+
+    if(!(*this).is_sorted()) {
+        throw "vector should be sorted in ascending order to perform binary search";
+    }
+    return s(*this, value);
 }
 
 template <class T>

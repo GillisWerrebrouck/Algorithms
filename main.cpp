@@ -62,9 +62,13 @@ void test_search_methods() {
     cout << "search vector: " << data;
 
     int value = 41;
+    int index;
 
-    int index = data.sequential_search(value);
+    index = data.sequential_search(value);
     print_search("sequential search", data, value, index);
+
+    index = data.binary_search(value);
+    print_search("binary search", data, value, index);
 }
 
 void print_sorted(const string& tag, ExtendedVector<int> & v) {
