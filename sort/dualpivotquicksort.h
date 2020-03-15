@@ -38,8 +38,8 @@ void DualPivotQuicksort<T>::dualpivotquicksort(vector<T> & v, int l, int r) {
         int k = l+1;
         int g = r-1;
 
-        int leftPivot = v[l];
-        int rightPivot = v[r];
+        T leftPivot = v[l];
+        T rightPivot = v[r];
 
         // while the fourth part still has unclassified elements
         while(k <= g) {
