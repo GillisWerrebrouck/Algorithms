@@ -13,6 +13,7 @@
 #include "../sort/topdownmergesort.h"
 #include "../sort/bottomupmergesort.h"
 #include "../sort/quicksort.h"
+#include "../sort/dualpivotquicksort.h"
 
 using std::vector;
 using std::ostream;
@@ -40,6 +41,7 @@ class ExtendedVector : public vector<T> {
         void top_down_merge_sort();
         void botom_up_merge_sort();
         void quicksort();
+        void dualpivotquicksort();
 
         bool is_sorted() const;
         bool is_range() const;
@@ -136,6 +138,12 @@ void ExtendedVector<T>::botom_up_merge_sort() {
 template <class T>
 void ExtendedVector<T>::quicksort() {
     Quicksort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::dualpivotquicksort() {
+    DualPivotQuicksort<T> s;
     s(*this);
 }
 

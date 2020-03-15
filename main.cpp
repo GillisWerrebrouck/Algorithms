@@ -41,6 +41,10 @@ void test_sort_methods(int size) {
 
     data.quicksort();
     print_sorted("quicksort", data);
+    data.fill_random();
+
+    data.dualpivotquicksort();
+    print_sorted("dual pivot quicksort", data);
 
 
     HeapVector<int> heap(size);
