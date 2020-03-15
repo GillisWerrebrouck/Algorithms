@@ -69,6 +69,11 @@ void test_search_methods() {
 
     index = data.binary_search(value);
     print_search("binary search", data, value, index);
+
+    data.rotate_left(20);
+    cout << "cyclical ordered search vector: " << data;
+    index = data.cyclic_binary_search(value);
+    print_search("cyclic binary search", data, value, index);
 }
 
 void print_sorted(const string& tag, ExtendedVector<int> & v) {

@@ -15,6 +15,7 @@
 #include "../sort/quicksort.h"
 #include "../sort/dualpivotquicksort.h"
 #include "../search/binarysearch.h"
+#include "../search/cyclicbinarysearch.h"
 
 using std::vector;
 using std::ostream;
@@ -35,6 +36,7 @@ class ExtendedVector : public vector<T> {
         void shuffle();
         void fill_random_without_doubles();
         void fill_random();
+        void rotate_left(int);
 
         void insertion_sort();
         void shell_sort();
@@ -46,6 +48,7 @@ class ExtendedVector : public vector<T> {
 
         int sequential_search(int);
         int binary_search(int);
+        int cyclic_binary_search(int);
 
         bool is_sorted() const;
         bool is_range() const;
@@ -109,6 +112,41 @@ void ExtendedVector<T>::fill_random() {
     std::generate(this->begin(), this->end(), [&dist, &rd]() { return dist(rd); });
 }
 
+int gdc(int a, int b) {
+    if(b == 0) {
+        return a;
+    } else {
+        return gdc(b, a%b);
+    }
+}
+
+template <class T>
+// O(N) time complexity and O(1) space complexity
+// juggling algorithm to rotate the vector p positions to the left
+void ExtendedVector<T>::rotate_left(int p) {
+    int n = (*this).size();
+    p = p%n;
+    int gdc_ = gdc(n, p);
+
+    for(int i = 0; i < gdc_; i++) {
+        int temp = (*this)[i];
+        int j = i;
+
+        while(1) {
+            int k = j + p;
+            if(k >= n)
+                k -= n;
+
+            if(k == i)
+                break;
+
+            swap((*this)[j], (*this)[k]);
+            j = k;
+        }
+        swap((*this)[j], temp);
+    }
+}
+
 template <class T>
 void ExtendedVector<T>::insertion_sort() {
     InsertionSort<T> s;
@@ -168,6 +206,12 @@ int ExtendedVector<T>::binary_search(int value) {
     if(!(*this).is_sorted()) {
         throw "vector should be sorted in ascending order to perform binary search";
     }
+    return s(*this, value);
+}
+
+template <class T>
+int ExtendedVector<T>::cyclic_binary_search(int value) {
+    CyclicBinarySearch<T> s;
     return s(*this, value);
 }
 
