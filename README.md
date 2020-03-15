@@ -24,7 +24,7 @@
 
 ### Search methods
 
-- [ ] sequential search
+- [x] sequential search
 - [ ] binary search
 - [ ] binary search in a cyclic ordered sequence
 - [ ] binary search in an ordered sequence of unknown length

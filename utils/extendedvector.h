@@ -41,7 +41,9 @@ class ExtendedVector : public vector<T> {
         void top_down_merge_sort();
         void botom_up_merge_sort();
         void quicksort();
-        void dualpivotquicksort();
+        void dual_pivot_quicksort();
+
+        int sequential_search(int);
 
         bool is_sorted() const;
         bool is_range() const;
@@ -142,9 +144,19 @@ void ExtendedVector<T>::quicksort() {
 }
 
 template <class T>
-void ExtendedVector<T>::dualpivotquicksort() {
+void ExtendedVector<T>::dual_pivot_quicksort() {
     DualPivotQuicksort<T> s;
     s(*this);
+}
+
+template <class T>
+int ExtendedVector<T>::sequential_search(int value) {
+    for(int i = 0; i < (*this).size(); i++) {
+        if((*this)[i] == value) {
+            return i;
+        }
+    }
+    return -1;
 }
 
 template <class T>
