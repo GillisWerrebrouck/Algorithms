@@ -20,7 +20,7 @@
 - [x] top-down merge sort
 - [x] bottom-up merge sort
 - [x] quick sort
-- [ ] dual pivot quick sort
+- [x] dual pivot quick sort
 
 ### Search methods
 
