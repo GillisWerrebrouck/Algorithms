@@ -6,6 +6,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 void test_sort_methods(int);
 void test_search_methods();
@@ -13,7 +14,7 @@ void print_sorted(const string&, ExtendedVector<int> &);
 void print_search(const string&, ExtendedVector<int> &, int, int);
 
 int main() {
-    test_sort_methods(25);
+    test_sort_methods(20);
     test_search_methods();
 
     return 0;
@@ -74,6 +75,21 @@ void test_search_methods() {
     cout << "cyclical ordered search vector: " << data;
     index = data.cyclic_binary_search(value);
     print_search("cyclic binary search", data, value, index);
+
+    // "infinite" vector
+    ExtendedVector<int> infinite_data(10'000);
+    infinite_data.quicksort();
+    value = 2'000;
+    index = infinite_data.infinite_binary_search(value);
+    print_search("infinite binary search", infinite_data, value, index);
+
+    // an ordered range has a uniform distribution of values
+    // which is suitable for interpolated search
+    data.fill_range();
+    value = 41;
+    index = data.interpolated_search(value);
+    print_search("interpolated search", data, value, index);
+
 }
 
 void print_sorted(const string& tag, ExtendedVector<int> & v) {

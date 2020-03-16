@@ -8,20 +8,19 @@ using std::vector;
 template <typename T>
 class BinarySearch {
     public:
-        int operator()(vector<T> & v, int value);
-    private:
-        int binary_search_recursive(vector<T> & v, int l, int r, int value);
-        int binary_search_iterative(vector<T> & v, int l, int r, int value);
+        int operator()(vector<T> & v, int value) const;
+        int binary_search_recursive(vector<T> & v, int l, int r, int value) const;
+        int binary_search_iterative(vector<T> & v, int l, int r, int value) const;
 };
 
 template <typename T>
-int BinarySearch<T>::operator()(vector<T> & v, int value) {
+int BinarySearch<T>::operator()(vector<T> & v, int value) const {
     return binary_search_iterative(v, 0, v.size()-1, value);
 }
 
 // O(lg(N)) time complexity and O(1) space complexity
 template <typename T>
-int BinarySearch<T>::binary_search_recursive(vector<T> & v, int l, int r, int value) {
+int BinarySearch<T>::binary_search_recursive(vector<T> & v, int l, int r, int value) const {
     if(l <= r) {
         int mid = l+(r-l) / 2;
 
@@ -40,7 +39,7 @@ int BinarySearch<T>::binary_search_recursive(vector<T> & v, int l, int r, int va
 // this has the same theoretical performance as the recursive version 
 // but it has a better practical performance because it doesn't use recursive function calls
 template <typename T>
-int BinarySearch<T>::binary_search_iterative(vector<T> & v, int l, int r, int value) {
+int BinarySearch<T>::binary_search_iterative(vector<T> & v, int l, int r, int value) const {
     while(l <= r) {
         int mid = l+(r-l) / 2;
 
