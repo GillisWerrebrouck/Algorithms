@@ -16,6 +16,7 @@
 #include "../sort/dualpivotquicksort.h"
 #include "../search/binarysearch.h"
 #include "../search/cyclicbinarysearch.h"
+#include "../search/infinitebinarysearch.h"
 
 using std::vector;
 using std::ostream;
@@ -49,6 +50,7 @@ class ExtendedVector : public vector<T> {
         int sequential_search(int);
         int binary_search(int);
         int cyclic_binary_search(int);
+        int infinite_binary_search(int);
 
         bool is_sorted() const;
         bool is_range() const;
@@ -212,6 +214,12 @@ int ExtendedVector<T>::binary_search(int value) {
 template <class T>
 int ExtendedVector<T>::cyclic_binary_search(int value) {
     CyclicBinarySearch<T> s;
+    return s(*this, value);
+}
+
+template <class T>
+int ExtendedVector<T>::infinite_binary_search(int value) {
+    InfiniteBinarySearch<T> s;
     return s(*this, value);
 }
 

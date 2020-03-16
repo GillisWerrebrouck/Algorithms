@@ -6,6 +6,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::vector;
 
 void test_sort_methods(int);
 void test_search_methods();
@@ -74,6 +75,13 @@ void test_search_methods() {
     cout << "cyclical ordered search vector: " << data;
     index = data.cyclic_binary_search(value);
     print_search("cyclic binary search", data, value, index);
+
+    // "infinite" vector
+    ExtendedVector<int> infinite_data(10'000);
+    infinite_data.quicksort();
+    value = 2'000;
+    index = infinite_data.infinite_binary_search(value);
+    print_search("infinite binary search", infinite_data, value, index);
 }
 
 void print_sorted(const string& tag, ExtendedVector<int> & v) {
