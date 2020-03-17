@@ -1,12 +1,12 @@
-#ifndef INTERPOLATEDSEARCH_H
-#define INTERPOLATEDSEARCH_H
+#ifndef INTERPOLATIONSEARCH_H
+#define INTERPOLATIONSEARCH_H
 
 #include <vector>
 
 using std::vector;
 
 template <typename T>
-class InterpolatedSearch {
+class InterpolationSearch {
     public:
         int operator()(vector<T> & v, int value) const;
 };
@@ -14,7 +14,7 @@ class InterpolatedSearch {
 // O(lg(lg(N))) time complexity if elements are uniformly distributed or O(N) in the worst case
 // O(1) space complexity
 template <typename T>
-int InterpolatedSearch<T>::operator()(vector<T> & v, int value) const {
+int InterpolationSearch<T>::operator()(vector<T> & v, int value) const {
     int n = v.size();
     int l = 0;
     int r = n-1;

@@ -84,11 +84,11 @@ void test_search_methods() {
     print_search("infinite binary search", infinite_data, value, index);
 
     // an ordered range has a uniform distribution of values
-    // which is suitable for interpolated search
+    // which is suitable for interpolation search
     data.fill_range();
     value = 41;
-    index = data.interpolated_search(value);
-    print_search("interpolated search", data, value, index);
+    index = data.interpolation_search(value);
+    print_search("interpolation search", data, value, index);
 
 }
 
