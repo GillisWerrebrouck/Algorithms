@@ -14,7 +14,7 @@ void print_sorted(const string&, ExtendedVector<int> &);
 void print_search(const string&, ExtendedVector<int> &, int, int);
 
 int main() {
-    test_sort_methods(20);
+    test_sort_methods(25);
     test_search_methods();
 
     return 0;
