@@ -49,12 +49,17 @@ void test_sort_methods(int size) {
 
     data.dual_pivot_quicksort();
     print_sorted("dual pivot quicksort", data);
+    data.fill_random();
 
 
     HeapVector<int> heap(size);
 
     heap.heap_sort();
     print_sorted("heap sort", heap);
+
+
+    data.counting_sort();
+    print_sorted("counting sort", data);
 }
 
 void test_search_methods() {
