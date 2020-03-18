@@ -32,7 +32,7 @@
 
 ### Distribution counting methods
 
-- [ ] counting sort
+- [x] counting sort
 - [ ] left-to-right methods
   - [ ] binairy quicksort or radix exchange sort (radix = 2)
   - [ ] MSD radix sort (radix = m)
