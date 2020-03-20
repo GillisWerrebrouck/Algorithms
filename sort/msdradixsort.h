@@ -43,7 +43,7 @@ void radix_counting_sort(vector<T> &v, int exp) {
 	}
 }
 
-// O(nk) time complexity with n being the number of elements and k the max digit count
+// O(N lg_m(N)) time complexity with N being the number of elements and m the radix
 template <typename T>
 void MSDRadixSort<T>::operator()(vector<T> & v) {
     T max = v[0];
