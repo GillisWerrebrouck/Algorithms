@@ -15,6 +15,11 @@
 #include "../sort/quicksort.h"
 #include "../sort/dualpivotquicksort.h"
 #include "../sort/countingsort.h"
+#include "../sort/radixexchangesort.h"
+#include "../sort/msdradixsort.h"
+#include "../sort/ternaryradixquicksort.h"
+#include "../sort/lsdradixsort.h"
+#include "../sort/bucketsort.h"
 #include "../search/binarysearch.h"
 #include "../search/cyclicbinarysearch.h"
 #include "../search/infinitebinarysearch.h"
@@ -49,6 +54,11 @@ class ExtendedVector : public vector<T> {
         void quicksort();
         void dual_pivot_quicksort();
         void counting_sort();
+        void radix_exchange_sort();
+        void msd_radix_sort();
+        void ternary_radix_quicksort();
+        void lsd_radix_sort();
+        void bucket_sort();
 
         int sequential_search(int);
         int binary_search(int);
@@ -114,6 +124,19 @@ void ExtendedVector<T>::fill_random() {
     const auto max_value = (this->size() - 1);
     assert(max_value < std::numeric_limits<int>::max());
     std::uniform_int_distribution<int> dist{0, static_cast<int>(max_value)};
+
+    std::generate(this->begin(), this->end(), [&dist, &rd]() { return dist(rd); });
+}
+
+template <>
+void ExtendedVector<float>::fill_random() {
+    if (this->empty()) {
+        return;
+    }
+
+    std::random_device rd;
+    std::mt19937 eng{rd()};
+    std::uniform_real_distribution<float> dist{0, 0.99};
 
     std::generate(this->begin(), this->end(), [&dist, &rd]() { return dist(rd); });
 }
@@ -195,10 +218,39 @@ void ExtendedVector<T>::dual_pivot_quicksort() {
     s(*this);
 }
 
-
 template <class T>
 void ExtendedVector<T>::counting_sort() {
     CountingSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::radix_exchange_sort() {
+    RadixExchangeSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::msd_radix_sort() {
+    MSDRadixSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::ternary_radix_quicksort() {
+    TernaryRadixQuicksort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::lsd_radix_sort() {
+    LSDRadixSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::bucket_sort() {
+    BucketSort<T> s;
     s(*this);
 }
 

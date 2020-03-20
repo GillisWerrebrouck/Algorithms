@@ -33,10 +33,10 @@
 ### Distribution counting methods
 
 - [x] counting sort
-- [ ] left-to-right methods
-  - [ ] binairy quicksort or radix exchange sort (radix = 2)
-  - [ ] MSD radix sort (radix = m)
-  - [ ] ternary radix quicksort
-- [ ] right-to-left methods
-  - [ ] LSD radix sort (radix = m)
-- [ ] bucket sort
+- [x] left-to-right methods
+  - [x] binairy quicksort or radix exchange sort (radix = 2)
+  - [x] MSD radix sort (radix = m)
+  - [x] ternary radix quicksort
+- [x] right-to-left methods
+  - [x] LSD radix sort (radix = m)
+- [x] bucket sort

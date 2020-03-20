@@ -10,8 +10,10 @@ using std::vector;
 
 void test_sort_methods(int);
 void test_search_methods();
-void print_sorted(const string&, ExtendedVector<int> &);
-void print_search(const string&, ExtendedVector<int> &, int, int);
+template <class T>
+void print_sorted(const string&, ExtendedVector<T> &);
+template <class T>
+void print_search(const string&, ExtendedVector<T> &, T, int);
 
 int main() {
     test_sort_methods(25);
@@ -51,15 +53,33 @@ void test_sort_methods(int size) {
     print_sorted("dual pivot quicksort", data);
     data.fill_random();
 
-
     HeapVector<int> heap(size);
-
     heap.heap_sort();
     print_sorted("heap sort", heap);
 
-
     data.counting_sort();
     print_sorted("counting sort", data);
+    data.fill_random();
+
+    data.radix_exchange_sort();
+    print_sorted("radix exchange sort", data);
+    data.fill_random();
+
+    data.msd_radix_sort();
+    print_sorted("MSD radix sort", data);
+    data.fill_random();
+
+    // current implementation of ternary radix quicksort is limited
+    ExtendedVector<int> data_trq(25);
+    data_trq.ternary_radix_quicksort();
+    print_sorted("ternary radix quicksort", data_trq);
+
+    data.lsd_radix_sort();
+    print_sorted("LSD radix sort", data);
+
+    ExtendedVector<float> data_bucket(size);
+    data_bucket.bucket_sort();
+    print_sorted("bucket sort", data_bucket);
 }
 
 void test_search_methods() {
@@ -97,12 +117,14 @@ void test_search_methods() {
 
 }
 
-void print_sorted(const string& tag, ExtendedVector<int> & v) {
+template <class T>
+void print_sorted(const string& tag, ExtendedVector<T> & v) {
     cout << "[ " << tag << (v.is_sorted() ? " ✔️" : " ❌") << " ]" << endl;
     cout << v << endl;
 }
 
-void print_search(const string& tag, ExtendedVector<int> & v, int value, int index) {
+template <class T>
+void print_search(const string& tag, ExtendedVector<T> & v, T value, int index) {
     cout << "[ " << tag << " ] Value " << value;
     if(index == -1) {
         cout << " not found";
