@@ -5,6 +5,7 @@
 
 using std::vector;
 using std::swap;
+using std::move;
 
 template <typename T>
 class MSDRadixSort {
