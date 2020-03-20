@@ -37,6 +37,6 @@
   - [x] binairy quicksort or radix exchange sort (radix = 2)
   - [x] MSD radix sort (radix = m)
   - [x] ternary radix quicksort
-- [ ] right-to-left methods
-  - [ ] LSD radix sort (radix = m)
+- [x] right-to-left methods
+  - [x] LSD radix sort (radix = m)
 - [ ] bucket sort
