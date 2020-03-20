@@ -39,4 +39,4 @@
   - [x] ternary radix quicksort
 - [x] right-to-left methods
   - [x] LSD radix sort (radix = m)
-- [ ] bucket sort
+- [x] bucket sort
