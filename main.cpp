@@ -70,12 +70,15 @@ void test_sort_methods(int size) {
 
     data.msd_radix_sort();
     print_sorted("MSD radix sort", data);
-    data.fill_random();
 
     // current implementation of ternary radix quicksort is limited
     ExtendedVector<int> data_trq(25);
     data_trq.ternary_radix_quicksort();
     print_sorted("ternary radix quicksort", data_trq);
+
+    data.fill_random();
+    data.lsd_radix_sort();
+    print_sorted("LSD radix sort", data);
 }
 
 void test_search_methods() {

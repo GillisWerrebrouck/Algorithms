@@ -18,6 +18,7 @@
 #include "../sort/radixexchangesort.h"
 #include "../sort/msdradixsort.h"
 #include "../sort/ternaryradixquicksort.h"
+#include "../sort/lsdradixsort.h"
 #include "../search/binarysearch.h"
 #include "../search/cyclicbinarysearch.h"
 #include "../search/infinitebinarysearch.h"
@@ -55,6 +56,7 @@ class ExtendedVector : public vector<T> {
         void radix_exchange_sort();
         void msd_radix_sort();
         void ternary_radix_quicksort();
+        void lsd_radix_sort();
 
         int sequential_search(int);
         int binary_search(int);
@@ -222,6 +224,12 @@ void ExtendedVector<T>::msd_radix_sort() {
 template <class T>
 void ExtendedVector<T>::ternary_radix_quicksort() {
     TernaryRadixQuicksort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::lsd_radix_sort() {
+    LSDRadixSort<T> s;
     s(*this);
 }
 
