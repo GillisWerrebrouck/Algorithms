@@ -53,12 +53,9 @@ void test_sort_methods(int size) {
     print_sorted("dual pivot quicksort", data);
     data.fill_random();
 
-
     HeapVector<int> heap(size);
-
     heap.heap_sort();
     print_sorted("heap sort", heap);
-
 
     data.counting_sort();
     print_sorted("counting sort", data);
@@ -70,15 +67,19 @@ void test_sort_methods(int size) {
 
     data.msd_radix_sort();
     print_sorted("MSD radix sort", data);
+    data.fill_random();
 
     // current implementation of ternary radix quicksort is limited
     ExtendedVector<int> data_trq(25);
     data_trq.ternary_radix_quicksort();
     print_sorted("ternary radix quicksort", data_trq);
 
-    data.fill_random();
     data.lsd_radix_sort();
     print_sorted("LSD radix sort", data);
+
+    ExtendedVector<float> data_bucket(size);
+    data_bucket.bucket_sort();
+    print_sorted("bucket sort", data_bucket);
 }
 
 void test_search_methods() {
