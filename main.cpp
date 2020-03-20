@@ -60,6 +60,11 @@ void test_sort_methods(int size) {
 
     data.counting_sort();
     print_sorted("counting sort", data);
+    data.fill_range();
+    data.shuffle();
+
+    data.radix_exchange_sort();
+    print_sorted("radix exchange sort", data);
 }
 
 void test_search_methods() {

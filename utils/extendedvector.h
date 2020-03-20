@@ -15,6 +15,7 @@
 #include "../sort/quicksort.h"
 #include "../sort/dualpivotquicksort.h"
 #include "../sort/countingsort.h"
+#include "../sort/radixexchangesort.h"
 #include "../search/binarysearch.h"
 #include "../search/cyclicbinarysearch.h"
 #include "../search/infinitebinarysearch.h"
@@ -49,6 +50,7 @@ class ExtendedVector : public vector<T> {
         void quicksort();
         void dual_pivot_quicksort();
         void counting_sort();
+        void radix_exchange_sort();
 
         int sequential_search(int);
         int binary_search(int);
@@ -195,10 +197,15 @@ void ExtendedVector<T>::dual_pivot_quicksort() {
     s(*this);
 }
 
-
 template <class T>
 void ExtendedVector<T>::counting_sort() {
     CountingSort<T> s;
+    s(*this);
+}
+
+template <class T>
+void ExtendedVector<T>::radix_exchange_sort() {
+    RadixExchangeSort<T> s;
     s(*this);
 }
 
