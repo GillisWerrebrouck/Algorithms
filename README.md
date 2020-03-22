@@ -29,6 +29,7 @@
 - [x] binary search in a cyclic ordered sequence
 - [x] binary search in an ordered sequence of unknown length
 - [x] interpolation search
+- [x] quickselect
 
 ### Distribution counting methods
 
