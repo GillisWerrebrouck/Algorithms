@@ -24,6 +24,7 @@
 #include "../search/cyclicbinarysearch.h"
 #include "../search/infinitebinarysearch.h"
 #include "../search/interpolationsearch.h"
+#include "../search/quickselect.h"
 
 using std::vector;
 using std::ostream;
@@ -65,6 +66,7 @@ class ExtendedVector : public vector<T> {
         int cyclic_binary_search(int);
         int infinite_binary_search(int);
         int interpolation_search(int);
+        T quickselect(int);
 
         bool is_sorted() const;
         bool is_range() const;
@@ -290,6 +292,12 @@ template <class T>
 int ExtendedVector<T>::interpolation_search(int value) {
     InterpolationSearch<T> s;
     return s(*this, value);
+}
+
+template <class T>
+T ExtendedVector<T>::quickselect(int k) {
+    Quickselect<T> s;
+    return s(*this, k);
 }
 
 template <class T>

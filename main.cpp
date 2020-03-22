@@ -115,6 +115,13 @@ void test_search_methods() {
     index = data.interpolation_search(value);
     print_search("interpolation search", data, value, index);
 
+    data.fill_random();
+    int k = 8;
+    value = data.quickselect(k);
+    cout << "unordered search vector: " << data;
+    data.quicksort();
+    cout << "ordered search vector: " << data;
+    print_search("quickselect", data, value, k);
 }
 
 template <class T>
