@@ -41,7 +41,7 @@ template <typename T>
 void BottomUpMergeSort<T>::merge(vector<T> & v, vector<T> & temp, int l, int m, int r) {
     // copy the first part to a temp vector
     int p = l;
-	while(p <= r) {
+	while(p <= m) {
         temp[p-l] = move(v[p]);
         p++;
     }
