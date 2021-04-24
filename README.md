@@ -35,7 +35,7 @@
 
 - [x] counting sort
 - [x] left-to-right methods
-  - [x] binairy quicksort or radix exchange sort (radix = 2)
+  - [x] binary quicksort or radix exchange sort (radix = 2)
   - [x] MSD radix sort (radix = m)
   - [x] ternary radix quicksort
 - [x] right-to-left methods
